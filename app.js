@@ -1,10 +1,13 @@
 "use strict";
 
+let humanScore = 0;
+let computerScore = 0;
+
 function getRandomNumber(start = 0, end = 100) {
   return Math.floor(Math.random() * end + start);
 }
 
-console.log(getRandomNumber(1, 3));
+// console.log(getRandomNumber(1, 3));
 
 function getComputerChoice() {
   let choice = getRandomNumber(1, 3);
@@ -25,7 +28,7 @@ function getComputerChoice() {
   }
 }
 
-console.log(getComputerChoice());
+// console.log(getComputerChoice());
 
 function getUserChoice() {
   let userChoice = Number(
@@ -47,4 +50,23 @@ function getUserChoice() {
   }
 }
 
-console.log(getUserChoice());
+// console.log(getUserChoice());
+
+function playRound(humanChoice, computerChoice) {
+  let human = humanChoice.toLowerCase();
+  let comp = computerChoice.toLowerCase();
+  if (human == comp) {
+    return "Draw";
+  } else if (human == "paper" && comp == "rock") {
+    return `You win. ${human} beats ${comp}.`;
+  } else if (human == "rock" && comp == "scissors") {
+    return `You win. ${human} beats ${comp}.`;
+  } else if (human == "scissors" && comp == "paper") {
+    return `You win. ${human} beats ${comp}.`;
+  } else {
+    return `Comp win. ${comp} beats ${human}.`;
+  }
+}
+
+let singleGame = playRound(getUserChoice(), getComputerChoice());
+console.log(singleGame);
