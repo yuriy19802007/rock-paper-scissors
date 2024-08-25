@@ -95,7 +95,7 @@ function playGame() {
 
     message = playRound(user, comp);
     console.log(message);
-    countGames--;
+    --countGames;
   } while (countGames > 0);
 }
 
