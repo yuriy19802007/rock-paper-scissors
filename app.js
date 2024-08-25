@@ -31,9 +31,19 @@ function getComputerChoice() {
 // console.log(getComputerChoice());
 
 function getUserChoice() {
-  let userChoice = Number(
-    prompt("Enter a number 1 : paper, 2 : scissors, 3 : rock")
-  );
+  let userChoice;
+
+  while (true) {
+    userChoice = Number(
+      prompt("Enter a number 1 : paper, 2 : scissors, 3 : rock")
+    );
+    if (userChoice == 1 || userChoice == 2 || userChoice == 3) {
+      break;
+    } else {
+      console.log("Invalid input.");
+    }
+  }
+
   switch (userChoice) {
     case 1: {
       return "paper";
@@ -55,6 +65,11 @@ function getUserChoice() {
 function playRound(humanChoice, computerChoice) {
   let human = humanChoice.toLowerCase();
   let comp = computerChoice.toLowerCase();
+
+  if (human == "error") {
+    return "Invalid input";
+  }
+
   if (human == comp) {
     return "Draw";
   } else if (human == "paper" && comp == "rock") {
@@ -68,5 +83,20 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
-let singleGame = playRound(getUserChoice(), getComputerChoice());
-console.log(singleGame);
+// let singleGame = playRound(getUserChoice(), getComputerChoice());
+// console.log(singleGame);
+
+function playGame() {
+  let countGames = 5;
+  let message;
+  do {
+    let comp = getComputerChoice();
+    let user = getUserChoice();
+
+    message = playRound(user, comp);
+    console.log(message);
+    countGames--;
+  } while (countGames > 0);
+}
+
+playGame();
