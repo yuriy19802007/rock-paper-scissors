@@ -1,7 +1,11 @@
 "use strict";
 
+const btnGroup = document.querySelector(".btn-group");
+const resultCard = document.querySelector(".card");
+
 let humanScore = 0;
 let computerScore = 0;
+let countGames = 5;
 
 function getRandomNumber(start = 0, end = 100) {
   return Math.floor(Math.random() * end + start);
@@ -30,17 +34,15 @@ function getComputerChoice() {
 
 // console.log(getComputerChoice());
 
-function getUserChoice() {
+function getUserChoice(num) {
   let userChoice;
 
   while (true) {
-    userChoice = Number(
-      prompt("Enter a number 1 : paper, 2 : scissors, 3 : rock")
-    );
+    userChoice = num;
     if (userChoice == 1 || userChoice == 2 || userChoice == 3) {
       break;
     } else {
-      console.log("Invalid input.");
+      resultCard.textContent = ("Invalid input.");
     }
   }
 
@@ -83,20 +85,41 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
+btnGroup.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn");
+  console.log(btn);
+  if (!btn) return;
+  let userChoice = btn.dataset.id;
+  if(userChoice==1){
+    userChoice = "paper";
+  }else if(userChoice==2){
+    userChoice = "scissors";
+  }else if(userChoice==3){
+    userChoice = "rock";
+  }
+  console.log(userChoice);
+  const computerChoice = getComputerChoice();
+  const result = playRound(userChoice, computerChoice);
+  resultCard.textContent = result;
+});
+
+
+
+
 // let singleGame = playRound(getUserChoice(), getComputerChoice());
 // console.log(singleGame);
 
-function playGame() {
-  let countGames = 5;
-  let message;
-  do {
-    let comp = getComputerChoice();
-    let user = getUserChoice();
+// function playGame() {
+//   
+//   let message;
+//   do {
+//     let comp = getComputerChoice();
+//     let user = getUserChoice();
 
-    message = playRound(user, comp);
-    console.log(message);
-    --countGames;
-  } while (countGames > 0);
-}
+//     message = playRound(user, comp);
+//     console.log(message);
+//     --countGames;
+//   } while (countGames > 0);
+// }
 
-playGame();
+// playGame();
